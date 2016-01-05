@@ -14,7 +14,7 @@ import {PersonGenderPipe} from './person-gender.pipe';
     <h2>All Persons</h2>
     <ul class="persons">
       <li *ngFor= "#person of persons" [ngClass]="person | personGender | slice:19 | lowercase">
-        <div>
+        <div class="info">
           <div class="name">
             {{person | personName}}
           </div>
@@ -25,7 +25,7 @@ import {PersonGenderPipe} from './person-gender.pipe';
         <div class="actions">
           <a href="/">Edit</a>
           <a href="/">Anc</a><!--Ancestors-->
-          <a href="/">Desc</a><!--Descendant-->
+          <a href="/">Des</a><!--Descendant-->
         </div>
       </li>
     </ul>

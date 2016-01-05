@@ -1,15 +1,66 @@
 .persons {list-style-type: none; margin: 0; padding: 0;border:none;}
-.persons li { border-bottom: 2px solid #fff;margin: 0; padding: 5px 5px 5px 5px; color: #fff; flex-direction: row;display: flex;justify-content:space-between;align-items:center;align-content:center}
-.persons li:last-child { border:none;}
-.persons li.male { background-color: #2175bc;}
-.persons li:hover.male  {background-color: #2586d7;}
-.persons li.female { background-color: #bc2121;}
-.persons li:hover.female  {background-color: #d72525;}
-.persons li.unknown { background-color: #6e6e6e;}
-.persons li:hover.unknown  {background-color: #7e7e7e;}
-.persons .name {font-size: 30px}
-.persons .additional {font-size: 20px}
-.persons .birth:before{content:"\002A"}
-.persons .death:before{content:"\271D"}
-.persons .actions a {text-decoration: none; background-color:#fff;color:#000;padding: 5px;}
-.persons .actions a:hover {background-color:#ccc; }
+.persons li {
+  cursor: pointer;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 11px; /*5 px margin + 6px from the border*/
+  color: #fff;
+  height: 70px;
+}
+.persons li:last-child { margin-bottom: 0;}
+
+.persons li .info {
+  height:100%;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  padding-left: 10px;
+}
+.persons li.male .info{ background-color: #2175bc;border-color: #2175bc;}
+.persons li.male .info:hover  {background-color: #2586d7;}
+.persons li.male .info:active {background-color: #3b94dd;}
+.persons li.female .info{ background-color: #bc2121;border-color: #bc2121;}
+.persons li.female .info:hover {background-color: #d72525;}
+.persons li.female .info:active {background-color: #dd3b3b;}
+.persons li.unknown .info{ background-color: #6e6e6e;border-color: #6e6e6e;}
+.persons li.unknown .info:hover {background-color: #7e7e7e;}
+.persons li.unknown .info:active {background-color: #8c8c8c;}
+
+.persons li .info .name {font-size: 30px}
+.persons li .info .additional {font-size: 20px;}
+.persons li .info .birth{margin-right: 20px;}
+.persons li .info .birth:before{content:"\002A \00a0"} /*asterix and space*/
+.persons li .info .death:before{content:"\271D \00a0"} /*latin cross and space*/
+
+.persons li .actions {
+  position: relative;
+  top: -70px;
+  height:100%;
+  margin-left:auto;
+  margin-right: 0;
+  width: 130px;
+  padding-right: 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items:center;
+}
+.persons li .actions a {
+  text-decoration: none;
+  background-color:#fff;
+  color:#000;
+  padding: 5px;
+  text-align: center;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+  border-color: #fff;
+}
+.persons li .actions a:hover {background-color:#ccc;}
+.persons li .actions a:active {background-color:#aaa;}
