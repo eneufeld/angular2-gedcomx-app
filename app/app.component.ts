@@ -5,8 +5,7 @@ import {PersonsComponent} from './person/persons.component';
 
 @Component({
     selector: 'my-app',
-    template:
-    `
+    template:`
     <h2>My App</h2>
     <a [routerLink]="['Persons']">List of Persons</a>
     <router-outlet></router-outlet>

@@ -9,8 +9,7 @@ import {PersonGenderPipe} from './person-gender.pipe';
 
 @Component({
     selector: 'person-list',
-    template:
-    `
+    template:`
     <h2>All Persons</h2>
     <ul class="persons">
       <li *ngFor= "#person of persons" [ngClass]="person | personGender | slice:19 | lowercase">
