@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {RouteConfig,ROUTER_DIRECTIVES } from 'angular2/router';
 import {GedcomXService} from './gedcomx/gedcomx.service';
 import {PersonsComponent} from './person/persons.component';
+import {PersonDetailComponent} from './person/person-detail.component';
 import {HomeComponent} from './home.component';
 
 @Component({
@@ -39,6 +40,7 @@ import {HomeComponent} from './home.component';
 @RouteConfig([
   { path: '/home', component: HomeComponent, name: 'Home' ,useAsDefault: true },
   { path: '/personlist', component: PersonsComponent, name: 'Persons'},
+  {path: '/person/:id', name: 'PersonDetail', component: PersonDetailComponent},
 ])
 export class AppComponent  {
 }

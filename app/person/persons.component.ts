@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {OnInit} from 'angular2/core';
+import {Component,OnInit} from 'angular2/core';
+import {Router} from 'angular2/router';
 import {GedcomXService} from '../gedcomx/gedcomx.service';
 import {Person} from 'gedcomx';
 import {PersonNamePipe} from './person-name.pipe';
@@ -12,7 +12,7 @@ import {PersonGenderPipe} from './person-gender.pipe';
     template:`
     <h2>All Persons</h2>
     <ul class="persons">
-      <li *ngFor= "#person of persons" [ngClass]="person | personGender | slice:19 | lowercase">
+      <li *ngFor= "#person of persons" [ngClass]="person | personGender | slice:19 | lowercase" (click)="gotoDetail(person)">
         <div class="info">
           <div class="name">
             {{person | personName}}
@@ -22,9 +22,9 @@ import {PersonGenderPipe} from './person-gender.pipe';
           </div>
         </div>
         <div class="actions">
-          <a href="/">Edit</a>
-          <a href="/">Anc</a><!--Ancestors-->
-          <a href="/">Des</a><!--Descendant-->
+          <button (click)="gotoDetail(person)">Edit</button>
+          <button>Anc</button><!--Ancestors-->
+          <button>Des</button><!--Descendant-->
         </div>
       </li>
     </ul>
@@ -34,11 +34,14 @@ import {PersonGenderPipe} from './person-gender.pipe';
 })
 export class PersonsComponent implements OnInit {
   public persons: Person[];
-  constructor(private _gedcomXService: GedcomXService) { }
+  constructor(private _gedcomXService: GedcomXService, private _router: Router) { }
   ngOnInit() {
     this.getPersons();
   }
   getPersons() {
     this._gedcomXService.getPersons().then(persons => this.persons = persons);
+  }
+  gotoDetail(person:Person) {
+    this._router.navigate(['PersonDetail', { id: person.id }]);
   }
 }
