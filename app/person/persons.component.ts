@@ -12,8 +12,8 @@ import {PersonGenderPipe} from './person-gender.pipe';
     template:`
     <h2>All Persons</h2>
     <ul class="persons">
-      <li *ngFor= "#person of persons" [ngClass]="person | personGender | slice:19 | lowercase" (click)="gotoDetail(person)">
-        <div class="info">
+      <li *ngFor= "#person of persons"  (click)="gotoDetail(person)">
+        <div class="info" [ngClass]="person | personGender | slice:19 | lowercase">
           <div class="name">
             {{person | personName}}
           </div>

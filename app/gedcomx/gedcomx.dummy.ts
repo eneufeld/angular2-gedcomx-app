@@ -29,7 +29,9 @@ export var GEDCOMX_DUMMY: GedcomXFile =
         }
       ],
       "gender": {
-        "type": "http://gedcomx.org/Male"
+        "type": "http://gedcomx.org/Male",
+        "id":"gender_id_1",
+        "lang":"de"
       },
       "facts": [
         {
@@ -164,7 +166,7 @@ export var GEDCOMX_DUMMY: GedcomXFile =
                   ]
                 },
                 {
-                  "type":"http://gedcomx.org/Middle",
+                  "type":"http://gedcomx.org/Given",
                   "value":"Ильи́ч",
                   "qualifiers":[{"name":
                     "http://gedcomx.org/Middle"}]

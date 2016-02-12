@@ -1,0 +1,30 @@
+<div *ngIf="person">
+  <header [ngClass]="person | personGender | slice:19 | lowercase">
+    <nav>Ancestors Descendants</nav>
+    <h1>{{person | personName}}</h1>
+  </header>
+  <!-- header -->
+
+
+
+  <label>Private:
+    <input [(ngModel)]="person.privatePerson" type="checkbox"/>
+  </label>
+  <!-- Gender -->
+  <fieldset>
+    <legend>Gender</legend>
+    <label>Gender:
+      <select [(ngModel)]="person.gender.type" *ngIf="person.gender">
+        <option *ngFor="#type of getAllGenderTypes()">{{type}}</option>
+      </select>
+      <button (click)="createGender()" *ngIf="!person.gender">Set Gender</button>
+    </label>
+    <conclusion [data]="person.gender" *ngIf="person.gender"></conclusion>
+  </fieldset>
+  <!-- Names -->
+  <names [data]="person.names"></names>
+  <!-- Facts -->
+  <facts [data]="person.facts"></facts>
+  <!-- Values of super type Subject -->
+  <subject [data]="person"></subject>
+</div>

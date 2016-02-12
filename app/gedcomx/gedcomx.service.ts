@@ -4,6 +4,9 @@ import {GEDCOMX_DUMMY} from './gedcomx.dummy'
 
 @Injectable()
 export class GedcomXService {
+  constructor() {
+    console.log("GedcomXService created")
+  }
   getPersons() {
     return Promise.resolve(GEDCOMX_DUMMY.persons);
   }

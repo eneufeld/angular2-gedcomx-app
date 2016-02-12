@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {RouteConfig,ROUTER_DIRECTIVES } from 'angular2/router';
+import {RouteConfig,ROUTER_DIRECTIVES,ROUTER_PROVIDERS } from 'angular2/router';
 import {GedcomXService} from './gedcomx/gedcomx.service';
 import {PersonsComponent} from './person/persons.component';
 import {PersonDetailComponent} from './person/person-detail.component';
@@ -11,6 +11,7 @@ import {HomeComponent} from './home.component';
     <div>
       <a [routerLink]="['Home']">Home</a>
       <a [routerLink]="['Persons']">List of Persons</a>
+      <button (click)="goBack()">Back</button>
     </div>
     <router-outlet></router-outlet>
     `,
@@ -35,7 +36,7 @@ import {HomeComponent} from './home.component';
       }
     `],
     directives:[ROUTER_DIRECTIVES],
-    providers: [GedcomXService]
+    providers: [ROUTER_PROVIDERS,GedcomXService]
 })
 @RouteConfig([
   { path: '/home', component: HomeComponent, name: 'Home' ,useAsDefault: true },
@@ -43,4 +44,7 @@ import {HomeComponent} from './home.component';
   {path: '/person/:id', name: 'PersonDetail', component: PersonDetailComponent},
 ])
 export class AppComponent  {
+  goBack() {
+      window.history.back();
+  }
 }
