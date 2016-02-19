@@ -22,16 +22,13 @@ declare module gedcomx_spec {
       text:string;
       attribution?:Attribution;
     }
-    enum ConfidenceType{
-
-    }
     interface Conclusion {
       id?:string;
       lang?:string;
       sources?:Array<SourceReference>;
       analysis?:ResourceReference;
       notes?:Array<Note>;
-      confidence?:ConfidenceType;
+      confidence?:string;
     }
     interface Gender extends Conclusion {
         type:string;
@@ -175,10 +172,7 @@ declare module gedcomx_spec {
     }
     interface Identifier{
       value:string;
-      type?:IdentifierType;
-    }
-    enum IdentifierType{
-
+      type?:string;
     }
     enum PlaceType{
 

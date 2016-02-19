@@ -1,18 +1,15 @@
 <div *ngIf="person">
-  <header [ngClass]="person | personGender | slice:19 | lowercase">
+  <!-- check https://angular.io/docs/ts/latest/api/common/NgClass-directive.html -->
+  <header [ngClass]="{male:isMale(), female:isFemale(), unknown:isUnknown()}">
     <nav>Ancestors Descendants</nav>
-    <h1>{{person | personName}}</h1>
+    <h1>{{getPersonName()}}</h1>
   </header>
   <!-- header -->
-
-
-
   <label>Private:
     <input [(ngModel)]="person.privatePerson" type="checkbox"/>
   </label>
   <!-- Gender -->
-  <fieldset>
-    <legend>Gender</legend>
+  <collapsibleFieldset legendLabel="Gender">
     <label>Gender:
       <select [(ngModel)]="person.gender.type" *ngIf="person.gender">
         <option *ngFor="#type of getAllGenderTypes()">{{type}}</option>
@@ -20,11 +17,22 @@
       <button (click)="createGender()" *ngIf="!person.gender">Set Gender</button>
     </label>
     <conclusion [data]="person.gender" *ngIf="person.gender"></conclusion>
-  </fieldset>
+  </collapsibleFieldset>
+
   <!-- Names -->
-  <names [data]="person.names"></names>
+  <collapsibleFieldset legendLabel="Names">
+    <button (click)="addName()">Add Name</button>
+    <div *ngFor="#name of person.names">
+      <name [data]="name"></name>
+    </div>
+  </collapsibleFieldset>
   <!-- Facts -->
-  <facts [data]="person.facts"></facts>
+  <collapsibleFieldset legendLabel="Facts">
+    <button (click)="addFact()">Add Fact</button>
+    <div *ngFor="#fact of person.facts">
+      <fact [data]="fact"></fact>
+    </div>
+  </collapsibleFieldset>
   <!-- Values of super type Subject -->
   <subject [data]="person"></subject>
 </div>

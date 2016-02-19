@@ -1,5 +1,7 @@
 import {Pipe} from 'angular2/core';
 import {Person} from 'gedcomx';
+import {PersonUtil} from './person-util';
+
 /**
   Return the name of a person.
   A person doesn't have any required fields, thus we are trying to get the most meaning full result.
@@ -18,25 +20,6 @@ import {Person} from 'gedcomx';
 @Pipe({name: 'personName'})
 export class PersonNamePipe {
   transform(person:Person) : any {
-    if (person.names!=undefined && person.names.length>0){
-      var nameForm=person.names[0].nameForms[0];
-      if (nameForm.fullText!==undefined){
-        return nameForm.fullText;
-      }
-      if (nameForm.parts!=undefined && nameForm.parts.length>0) {
-        var result:string;
-        for (var namePart of nameForm.parts) {
-          if (result==undefined){
-            result="";
-          }
-          else {
-            result=result.concat(" ");
-          }
-          result=result.concat(namePart.value);
-        }
-        return result;
-      }
-    }
-    return JSON.stringify(person);
+    return PersonUtil.getPersonName(person);
   }
 }

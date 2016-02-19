@@ -11,6 +11,7 @@ import {PersonGenderPipe} from './person-gender.pipe';
     selector: 'person-list',
     template:`
     <h2>All Persons</h2>
+    <button (click)="addPerson()">Add Person</button>
     <ul class="persons">
       <li *ngFor= "#person of persons"  (click)="gotoDetail(person)">
         <div class="info" [ngClass]="person | personGender | slice:19 | lowercase">
@@ -37,6 +38,14 @@ export class PersonsComponent implements OnInit {
   constructor(private _gedcomXService: GedcomXService, private _router: Router) { }
   ngOnInit() {
     this.getPersons();
+  }
+  addPerson(){
+    if(this.persons==undefined){
+      this.persons = new Array<Person>();
+    }
+    var person:Person={id:"person_"+Math.round(Math.random()*100)};
+    this.persons.push(person);
+    this.gotoDetail(person);
   }
   getPersons() {
     this._gedcomXService.getPersons().then(persons => this.persons = persons);
