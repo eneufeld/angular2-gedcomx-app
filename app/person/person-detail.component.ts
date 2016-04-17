@@ -1,73 +1,66 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit,Inject} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
-import {Person, Gender,Name,NameForm} from 'gedcomx';
-import {GedcomXService} from '../gedcomx/gedcomx.service';
-import {GENDER_TYPE} from '../gedcomx/gedcomx.constants';
-import {PersonNamePipe} from './person-name.pipe';
-import {PersonGenderPipe} from './person-gender.pipe';
-import {ConclusionComponent} from '../common/conclusion.component';
-import {SubjectComponent} from '../common/subject.component';
-import {NameComponent} from './names/name.component';
-import {FactComponent} from '../common/fact.component';
+import {DataProviderService} from '../DataProviderService';
 import {PersonUtil} from './person-util';
-import {CollapsibleFieldsetComponent} from '../common/collapsibleFieldset.component';
+import {FORM_PROVIDERS,FORM_DIRECTIVES} from 'forms_a2/forms_a2';
 
 @Component({
     selector: 'person-detail',
-    templateUrl: 'app/person/person-detail.component.html',
+    template:`
+    <div *ngIf="_person">
+      <header [ngClass]="getGenderClass()">
+        <!-- <nav>Ancestors Descendants</nav> -->
+        <h1>{{getPersonName()}}</h1>
+      </header>
+      <form-outlet [data]="_person" [dataSchema]="_schema.definitions.person" [root]="true" [refs]="_refs"></form-outlet>
+    </div>
+    <div *ngIf="!_person">Loading...</div>
+    `,
     styles: [``],
-    pipes: [PersonNamePipe,PersonGenderPipe],
-    directives:[ConclusionComponent,SubjectComponent,NameComponent,FactComponent,CollapsibleFieldsetComponent]
+    pipes: [],
+    directives:[FORM_DIRECTIVES]
 })
 export class PersonDetailComponent implements OnInit {
-    public person: Person;
+    private _person: any;
+    private _schema:any;
+    private _refs:any;
 
-    constructor(private _gedcomXService: GedcomXService,
+    constructor(@Inject('DataProviderService') private _dataProviderService: DataProviderService,
         private _routeParams: RouteParams) {
     }
 
     ngOnInit() {
-        if (!this.person) {
+        this._schema=this._dataProviderService.getSchema().then(schema=>{this._schema=schema});
+        this._refs=this._dataProviderService.getRefs().then(refs=>{this._refs=refs});
+        if (!this._person) {
             let id = this._routeParams.get('id');
-            this._gedcomXService.getPerson(id).then(person => this.person = person);
+            this._dataProviderService.getPerson(id).then(
+              person => {this._person = person}
+            );
         }
     }
-
-    createGender() {
-        this.person.gender = { "type": GENDER_TYPE.UNKNOWN };
-    }
-    getAllGenderTypes() {
-        return GENDER_TYPE.ALL;
-    }
+    /*
     isMale(){
-      if(this.person.gender==undefined)
+      if(this._person.gender==undefined)
         return false;
-      return this.person.gender.type==GENDER_TYPE.MALE;
+      return this._person.gender.type=="http://gedcomx.org/Male";
     }
     isFemale(){
-      if(this.person.gender==undefined)
+      if(this._person.gender==undefined)
         return false;
-      return this.person.gender.type==GENDER_TYPE.FEMALE;
+      return this._person.gender.type=="http://gedcomx.org/Female";
     }
     isUnknown(){
-      if(this.person.gender==undefined)
+      if(this._person.gender==undefined)
         return true;
-      return this.person.gender.type==GENDER_TYPE.UNKNOWN;
+      return this._person.gender.type=="http://gedcomx.org/Unknown";
     }
-
-    addName(){
-      if(this.person.names==undefined){
-        this.person.names = new Array<Name>();
-      }
-      var name:Name={nameForms:new Array<NameForm>({})};
-      this.person.names.push(name);
+    */
+    getGenderClass(){
+      return PersonUtil.getGenderClass(this._person);
     }
 
     getPersonName():string {
-      return PersonUtil.getPersonName(this.person);
-    }
-
-    test():void{
-      console.log("Test called");
+      return PersonUtil.getPersonName(this._person);
     }
 }

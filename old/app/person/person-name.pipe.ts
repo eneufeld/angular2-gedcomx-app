@@ -1,4 +1,5 @@
 import {Pipe} from 'angular2/core';
+import {Person} from 'gedcomx';
 import {PersonUtil} from './person-util';
 
 /**
@@ -18,7 +19,7 @@ import {PersonUtil} from './person-util';
 **/
 @Pipe({name: 'personName'})
 export class PersonNamePipe {
-  transform(person:any) : any {
+  transform(person:Person) : any {
     return PersonUtil.getPersonName(person);
   }
 }
