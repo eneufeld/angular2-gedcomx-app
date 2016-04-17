@@ -4,3 +4,5 @@ node_modules/
 teststuff/
 bower_components/
 typings/
+.idea
+*.iml
