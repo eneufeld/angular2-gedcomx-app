@@ -104,14 +104,12 @@
 			"type": "object",
 			"properties": {
 				"resource": {"$ref": "#/definitions/uri"}
-			},
-			"required": []
+			}
 		},
 		"identifier": {
 			"type": "object",
 			"properties": {
-      },
-			"required": []
+      }
 		},
     "attribution": {
 			"type": "object",
@@ -119,8 +117,7 @@
 				"contributor": {"$ref": "#/definitions/resourceReference"},
 				"modified":{"type":"integer"},
 				"changeMessage":{"type":"string"}
-			},
-			"required": []
+			}
 		},
 		"note": {
 			"type": "object",
@@ -186,8 +183,7 @@
 				"street4": {"type": "string"},
 				"street5": {"type": "string"},
 				"street6": {"type": "string"}
-			},
-			"required": []
+			}
 		},
     "conclusion": {
 			"type": "object",
@@ -204,8 +200,7 @@
 					"items": {"$ref": "#/definitions/note"}
         },
         "confidence": {"$ref": "#/definitions/uri"}
-      },
-			"required": []
+      }
 		},
     "subject": {
       "allOf": [
@@ -223,8 +218,7 @@
     				},
             "identifiers": {"$ref": "#/definitions/identifier"},
             "attribution": {"$ref": "#/definitions/attribution"}
-          },
-          "required": []
+          }
         }
       ]
 		},
@@ -252,8 +246,7 @@
 					"type": "string",
 					"pattern": "^(A?[\\+-]\\d{4}(-\\d{2})?(-\\d{2})?T?(\\d{2})?(:\\d{2})?(:\\d{2})?([\\+-]\\d{2}(:\\d{2})?|Z)?)|(P(\\d{0,4}Y)?(\\d{0,4}M)?(\\d{0,4}D)?(T(\\d{0,4}H)?(\\d{0,4}M)?(\\d{0,4}S)?)?)$"
 				}
-			},
-			"required": []
+			}
 		},
 		"qualifier": {
 			"type": "object",
@@ -350,16 +343,14 @@
 			"properties": {
 				"original": {"type":"string"},
 				"description": {"$ref": "#/definitions/uri"}
-			},
-			"required": []
+			}
 		},
 		"coverage": {
 			"type": "object",
 			"properties": {
 				"spatial": {"$ref": "#/definitions/placeReference"},
 				"temporal": {"$ref": "#/definitions/date"}
-			},
-			"required": []
+			}
 		},
 		"person": {
       "allOf": [
@@ -376,8 +367,7 @@
     					"type": "array",
     					"items": {"$ref": "#/definitions/fact"}
     				}
-          },
-          "required": []
+          }
         }
       ]
 		},
@@ -475,8 +465,7 @@
 					"items": {"$ref": "#/definitions/address"}
 				},
 				"person": {"$ref": "#/definitions/resourceReference"}
-			},
-			"required": []
+			}
 		},
 		"event": {
 			"allOf": [
@@ -490,8 +479,7 @@
 							"type": "array",
 							"items": {"$ref": "#/definitions/eventRole"}
 						}
-					},
-					"required": []
+					}
 				}
 			]
 		},
